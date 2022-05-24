@@ -1,0 +1,171 @@
+Unable to contact the remote controller at 127.0.0.1:6633
+*** Ping: testing ping reachability
+h1 -> h2 X X X X X X 
+h2 -> h1 X X X X X X 
+h3 -> h1 h2 h4 X X X X 
+h4 -> h1 h2 h3 X X X X 
+h5 -> h1 h2 X X h6 h7 X 
+h6 -> h1 h2 X X h5 h7 X 
+h7 -> h1 h2 X X h5 h6 X 
+h8 -> X X X X X X X 
+*** Results: 64% dropped (20/56 received)
+h3 -> X 
+h7 -> X 
+*** Results: 100% dropped (0/2 received)
+Starting web servers...
+Started web servers successfully
+========== TEST 1 ==========
+pingall results correct
+PASSED
+=========== TEST 2 ==========
+HTTP Access from PbZ to web servers IP addresses on port 80
+Expected result - not able to curl
+curl: (28) Connection timed out after 3001 milliseconds
+
+curl: (28) Connection timed out after 3001 milliseconds
+
+curl: (28) Connection timed out after 3002 milliseconds
+
+curl: (28) Connection timed out after 3001 milliseconds
+
+curl: (28) Connection timed out after 3002 milliseconds
+
+curl: (28) Connection timed out after 3001 milliseconds
+
+PASSED
+========== TEST 3 ==========
+HTTP Access from PrZ to web servers IP addresses on port 80
+Expected result - not able to curl
+curl: (28) Connection timed out after 2001 milliseconds
+
+curl: (28) Connection timed out after 2001 milliseconds
+
+curl: (28) Connection timed out after 2001 milliseconds
+
+curl: (28) Connection timed out after 2001 milliseconds
+
+curl: (28) Connection timed out after 2001 milliseconds
+
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+============ TEST 4 ==========
+HTTP Access from PbZ to DmZ virtual IP on a random port
+Expected result - not able to curl to another port than 80
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+=========== TEST 5 ==========
+HTTP Access from PrZ to DmZ virtual IP on a random port
+Expected result - not able to curl to another port than 80
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+=========== TEST 6 ==========
+PING CURL PING from h3 to h7 IP address
+Expected result - not able to curl from web server IP address
+100.0
+curl: (28) Connection timed out after 2001 milliseconds
+
+PASSED
+=========== TEST 7 ===========
+CURL PING CURL from h3 to h1
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.4.3
+Date: Mon, 23 May 2022 10:50:55 GMT
+Content-type: text/html
+Content-Length: 51
+Last-Modified: Mon, 23 May 2022 09:12:24 GMT
+
+
+PASSED
+=========== TEST 8 ==========
+HTTP GET request from PbZ to LB virtual IP address on port 80
+Expected result - not able to GET
+Serving HTTP on 0.0.0.0 port 80 ...
+100.0.0.1 - - [23/May/2022 12:50:55] "HEAD / HTTP/1.1" 200 -
+100.0.0.1 - - [23/May/2022 12:50:55] "HEAD / HTTP/1.1" 200 -
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+PASSED
+=========== TEST 9 ==========
+HTTP Access from PrZ to LB virtual IP address on port 80
+Expected result - not able to GET
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+PASSED
+=========== TEST 10 ==========
+HTTP POST and PUT request from PbZ to LB virtual IP address on port 80
+Expected result - POST and PUT allowed
+Hi 100.0.0.45:57476!
+You asked POST at /.
+My job here is finished.
+
+Hi 100.0.0.45:57477!
+You asked PUT at /.
+My job here is finished.
+
+Hi 100.0.0.45:60331!
+You asked POST at /.
+My job here is finished.
+
+Hi 100.0.0.45:60332!
+You asked PUT at /.
+My job here is finished.
+
+PASSED
+=========== TEST 11 ==========
+HTTP POST and PUT request from PrZ to LB virtual IP address on port 80
+Expected result - POST and PUT allowed
+Hi 100.0.0.45:53121!
+You asked POST at /.
+My job here is finished.
+
+Hi 100.0.0.45:51769!
+You asked PUT at /.
+My job here is finished.
+
+Hi 100.0.0.45:54934!
+You asked POST at /.
+My job here is finished.
+
+Hi 100.0.0.45:54404!
+You asked PUT at /.
+My job here is finished.
+
+PASSED
+=========== TEST 12 ==========
+HTTP PUT request with SQL injection from PbZ to LB virtual IP address on port 80
+Expected result - POST not allowed because of SQL injection
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+PASSED
+========= TEST 13 ==========
+HTTP POST should pass with SQL injection
+Expected result - POST should pass
+Hi 100.0.0.45:52637!
+You asked POST at /.
+My job here is finished.
+
+Hi 100.0.0.45:53893!
+You asked POST at /.
+My job here is finished.
+
+PASSED
+=================
+FINAL SCORE: 13/13
